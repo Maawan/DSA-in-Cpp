@@ -10,6 +10,7 @@ class A{
         st = new char(100);
         strcpy(st , ch);
     }
+    // Comment this Copy Constuctor for Shallow Copy
     A(A& newObj){
         this->st = new char(100);
         strcpy(this->st , newObj.st);
