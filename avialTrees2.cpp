@@ -38,6 +38,33 @@ int getBalanceFactor(Tree* root){
     }
     return getHeight(root->left) - getHeight(root->right);
 }
+Tree* LLRotation(Tree* root){
+    Tree* rightNode = root;
+    Tree* nextLeftNode = root->left->right;
+    root = root->left;
+    root->right = rightNode;
+    root->right->left = nextLeftNode;
+    root->right->height = 1 + max(getHeight(root->right->left) , getHeight(root->right->right));
+    root->height = 1 + max(getHeight(root->left) , getHeight(root->right));
+    return root;
+}
+Tree* RRRotation(Tree* root){
+    Tree* leftNode = root;
+    Tree* nextRight = root->right->left;
+    root = root->right;
+    root->left = leftNode;
+    root->left->right = nextRight;
+    root->left->height = 1 + max(getHeight(root->left->left) , getHeight(root->left->right));
+    return root;
+}
+Tree* LRroTation(Tree* root){
+    root->left = RRRotation(root->left);
+    return LLRotation(root);
+}
+Tree* RlRotation(Tree* root){
+    root->right = LLRotation(root->right);
+    return RRRotation(root);
+}
 Tree* insertVal(Tree* root , int val){
     if(root == NULL){
         return createNode(val);
@@ -48,8 +75,31 @@ Tree* insertVal(Tree* root , int val){
         root->right = insertVal(root->right , val);
     }
     root->height = 1 + max(getHeight(root->left) , getHeight(root->right));
+    int bf = getBalanceFactor(root);
     if(abs(getBalanceFactor(root)) > 1){
         cout << "Tree is Imbalance " << endl;
+    }
+    if(bf > 1){
+        if(root->left != NULL){
+            if(root->left->val > val){
+                cout << "Its a case of LL ROtation" << endl;
+                return LLRotation(root);
+            }else if(root->left->val < val){
+                cout << "Its a case of LR Rotataion " << endl;
+                return LRroTation(root);
+            }
+            
+        }
+    }else if(bf < -1){
+        if(root->right != NULL){
+            if(root->right->val < val){
+                cout << "Its a Case of RR Rotation " << endl;
+                return RRRotation(root);
+            }else{
+                cout << "Its a Case of RL Rotation " << endl;
+                return RlRotation(root);
+            }
+        }
     }
     return root;
 }
@@ -72,10 +122,15 @@ void inOrder(Tree* root){
 }
 int main(){
     Tree* root = NULL;
-    vector<int> vals = {4,5,2};
+    vector<int> vals = {3,5,4};
     for(int i = 0 ; i < vals.size() ; i++){
         root = insertVal(root , vals[i]);
     }
     inOrder(root);
+    if(isBalanced(root)){
+        cout << " Yes ! Your Tree is Balanced :) " << endl;
+    }else{
+        cout << " Oops ! Tree is getting Imbalanced :( " << endl;
+    }
     return 0;
 }
