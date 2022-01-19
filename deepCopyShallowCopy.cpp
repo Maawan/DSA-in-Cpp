@@ -27,7 +27,7 @@ class A{
 };
 int main(){
     char ch[] = {'B','a','b','b','e','r','\0'};
-    A *dyanmic = new A(8899 , ch);
+    A* const dyanmic = new A(8899 , ch);
     A one(786 , ch);
     A second(one);
     second.st[0] = 'M';
