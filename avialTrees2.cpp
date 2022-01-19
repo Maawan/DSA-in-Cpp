@@ -21,7 +21,6 @@ Tree* createNode(int v){
     node->height = 1;
     node->left = NULL;
     node->right = NULL;
-
     return node;
 }
 int getHeight(Tree* root){
@@ -49,6 +48,34 @@ Tree* insertVal(Tree* root , int val){
         root->right = insertVal(root->right , val);
     }
     root->height = 1 + max(getHeight(root->left) , getHeight(root->right));
-
+    if(abs(getBalanceFactor(root)) > 1){
+        cout << "Tree is Imbalance " << endl;
+    }
     return root;
+}
+bool isBalanced(Tree* root){
+    if(root == NULL) return true;
+    int left = getHeight(root->left);
+    int right = getHeight(root->right);
+    if(abs(left - right) == 0 || abs(left - right) == 1){
+        bool l = isBalanced(root->left);
+        bool r = isBalanced(root->right);
+        if(l && r) return true;
+    }
+    return false;
 } 
+void inOrder(Tree* root){
+    if(root == NULL) return;
+    inOrder(root->left);
+    cout << root->val << " ";
+    inOrder(root->right);
+}
+int main(){
+    Tree* root = NULL;
+    vector<int> vals = {4,5,2};
+    for(int i = 0 ; i < vals.size() ; i++){
+        root = insertVal(root , vals[i]);
+    }
+    inOrder(root);
+    return 0;
+}
