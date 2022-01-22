@@ -122,7 +122,7 @@ void inOrder(Tree* root){
 }
 int main(){
     Tree* root = NULL;
-    vector<int> vals = {3,5,4};
+    vector<int> vals = {8 , 3 , 4 , 9 , 19 , 13 , 2 , 20 , 21 , 1 , 5};
     for(int i = 0 ; i < vals.size() ; i++){
         root = insertVal(root , vals[i]);
     }
