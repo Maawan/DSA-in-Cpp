@@ -9,4 +9,5 @@ int main(){
     pq.push(-1 * 45);
     cout << pq.top() << endl;pq.pop();
     cout << pq.top() << endl;
+    
 }

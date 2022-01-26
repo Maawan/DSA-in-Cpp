@@ -38,6 +38,7 @@ int getBalanceFactor(Tree* root){
     }
     return getHeight(root->left) - getHeight(root->right);
 }
+int 
 Tree* LLRotation(Tree* root){
     Tree* rightNode = root;
     Tree* nextLeftNode = root->left->right;

@@ -42,6 +42,13 @@ class Base2 : public Super {
 class Child : public Base1 , public Base2{
 
 };
+class Base3 { 
+    int val;
+    public:
+    void getResults(){
+        
+    }
+}
 int main(){
     Child obj;
     obj.sample2();

@@ -4,7 +4,7 @@ using namespace std;
 int main(){
     int toBePaid = 0 , workerAlreadyHas = 0;
     bool one = true , two = true ,  four = true;
-    for(int i = 1 ; i <= 8 ; i++){
+    for(int i = 1 ; i < 8 ; i++){
         cout << "Day " << i  << " ";
         toBePaid++;
         if(one){
