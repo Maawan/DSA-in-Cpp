@@ -31,3 +31,4 @@ class Disjoint{
         private boolean isConnected(int node1 , int node2){
             return find(node1) == find(node2);
         }
+}
